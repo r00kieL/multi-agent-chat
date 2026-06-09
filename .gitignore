@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 multi-agent-project.md
+
+.env
