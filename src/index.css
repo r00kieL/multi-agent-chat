@@ -1,8 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Lora', 'Georgia', 'Times New Roman', serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", "Georgia", "Times New Roman", serif;
   --color-surface: #171717;
   --color-surface-elevated: #212121;
   --color-surface-input: #2f2f2f;
@@ -42,7 +42,7 @@
   }
 
   .mode-flash-overlay::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -94,13 +94,13 @@
       transform 0.32s ease;
   }
 
-  .mode-depth-panel[data-open='true'] {
+  .mode-depth-panel[data-open="true"] {
     grid-template-rows: 1fr;
     opacity: 1;
     transform: translateX(0);
   }
 
-  .mode-depth-panel[data-open='false'] {
+  .mode-depth-panel[data-open="false"] {
     grid-template-rows: 0fr;
     opacity: 0;
     transform: translateX(-6px);
