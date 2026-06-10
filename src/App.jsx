@@ -33,7 +33,7 @@ export default function App() {
   const [depth, setDepth] = useState("medium");
   const [sessionType, setSessionType] = useState(null);
 
-  const demo = useDiscussion();
+  const discussion = useDiscussion();
   const chat = useChat();
 
   const greeting = useMemo(() => getGreeting(), []);
@@ -42,7 +42,7 @@ export default function App() {
   const isDiscussionSession = sessionType === "discussion";
   const isChatSession = sessionType === "chat";
   const isRunning =
-    (isDiscussionSession && demo.status === "running") ||
+    (isDiscussionSession && discussion.status === "running") ||
     (isChatSession && chat.status === "running");
 
   const homeCopy = HOME_COPY[inputMode];
@@ -53,7 +53,7 @@ export default function App() {
 
     if (inputMode === "discussion") {
       setSessionType("discussion");
-      demo.startDemo(q, depth);
+      discussion.startDiscussion(q, depth);
     } else {
       setSessionType("chat");
       chat.startChat(q);
@@ -61,7 +61,7 @@ export default function App() {
   };
 
   const handleNewChat = () => {
-    demo.reset();
+    discussion.reset();
     chat.reset();
     setSessionType(null);
     setQuestion("");
@@ -142,17 +142,17 @@ export default function App() {
           </div>
 
           <RoundIndicator
-            currentRound={demo.currentRound}
-            totalRounds={demo.totalRounds}
-            status={demo.status}
+            currentRound={discussion.currentRound}
+            totalRounds={discussion.totalRounds}
+            status={discussion.status}
           />
 
-          <AgentGrid agents={demo.agents} streaming={demo.streaming} />
+          <AgentGrid agents={discussion.agents} streaming={discussion.streaming} />
 
           <Summary
-            text={demo.summary}
-            visible={demo.status === "done" || demo.summary.length > 0}
-            isStreaming={isRunning && !demo.summary}
+            text={discussion.summary}
+            visible={discussion.status === "done" || discussion.summary.length > 0}
+            isStreaming={isRunning && !discussion.summary}
           />
 
           <div className="mt-8 sticky bottom-0 pb-4 bg-linear-to-t from-surface-elevated via-surface-elevated to-transparent pt-6">
