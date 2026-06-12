@@ -34,8 +34,8 @@ export default function useDiscussion() {
   const [currentRound, setCurrentRound] = useState(1);
   const [totalRounds, setTotalRounds] = useState(1);
 
-  const [agents, setAgents] = useState(["", "", ""]);
   const [streaming, setStreaming] = useState([false, false, false]);
+  const [agents, setAgents] = useState(["", "", ""]);
   const [summary, setSummary] = useState("");
 
   const reset = () => {

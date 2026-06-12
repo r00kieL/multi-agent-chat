@@ -19,7 +19,7 @@ export async function streamFromAgent(systemPrompt, messages, onChunk) {
 
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
-  
+
   let buffer = '';
   while (true) {
     const { done, value } = await reader.read();
@@ -40,7 +40,7 @@ export async function streamFromAgent(systemPrompt, messages, onChunk) {
     // 6. 有内容就调用 onChunk(content)
     for (const line of lines) {
       if (!line.startsWith('data: ')) continue;
-      
+
       const raw = line.slice(6);
       if (raw === '[DONE]') return;
 
