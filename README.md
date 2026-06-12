@@ -6,26 +6,28 @@
 
 ### 对话模式（Chat）
 
-单 Agent 快速问答，流式输出回复。
+- 单 Agent 快速问答
+- 流式输出，末尾显示打字光标
 
 ### 讨论模式（Discussion）
 
-三个 Agent 并行思考同一问题：
+- 三个 Agent 并行思考：**批判者**、**乐观者**、**务实者**
+- 可配置讨论深度（1 / 2 / 3 轮）
+- 讨论结束后由主持人 Agent 生成**综合结论**
+- 实时展示各 Agent 输出与轮次进度
 
-| 角色 | 关注点 |
-|------|--------|
-| 批判者 | 质疑前提、列出风险 |
-| 乐观者 | 发掘机会与积极面 |
-| 务实者 | 可落地步骤、资源与时间线 |
+### 通用
 
-讨论结束后，主持人 Agent 综合三视角生成「综合结论」。讨论深度可选 1～3 轮（低 / 中 / 高）。
+- 深色主题 UI（Tailwind CSS）
+- 回复内容 Markdown 渲染（标题、列表、加粗、链接、代码块等）
+- 侧边栏快捷提示与新建会话
 
 ## 技术栈
 
 - React 19 + Vite 8
 - Tailwind CSS 4
-- DeepSeek Chat Completions API（SSE 流式）
-- [react-markdown](https://github.com/remarkjs/react-markdown) + [remark-gfm](https://github.com/remarkjs/remark-gfm)（GFM Markdown 渲染）
+- DeepSeek Chat API（SSE 流式）
+- [react-markdown](https://github.com/remarkjs/react-markdown) + [remark-gfm](https://github.com/remarkjs/remark-gfm)
 
 ## 本地运行
 
@@ -34,51 +36,54 @@ pnpm install
 pnpm dev
 ```
 
-环境变量（根目录 `.env`，勿提交）：
+浏览器访问 Vite 输出的本地地址（通常为 `http://localhost:5173`）。
+
+### 环境变量
+
+根目录创建 `.env`（勿提交到 Git）：
 
 ```
 VITE_DEEPSEEK_API_KEY=你的密钥
 ```
 
-## 脚本
+### 其他命令
 
-| 命令 | 说明 |
-|------|------|
-| `pnpm dev` | 开发服务器 |
-| `pnpm build` | 生产构建 |
-| `pnpm preview` | 预览构建产物 |
-| `pnpm lint` | ESLint 检查 |
+```bash
+pnpm build    # 生产构建
+pnpm preview  # 预览构建产物
+pnpm lint     # ESLint 检查
+```
 
-## 目录结构
+## 项目结构
 
 ```
 src/
-├── App.jsx                 # 路由态：首页 / 对话 / 讨论
+├── App.jsx                 # 路由式页面切换（首页 / 对话 / 讨论）
 ├── components/
 │   ├── StreamText.jsx      # 流式文本 + Markdown 渲染
 │   ├── ChatView.jsx        # 对话模式视图
 │   ├── AgentGrid.jsx       # 三 Agent 卡片布局
 │   ├── AgentCard.jsx       # 单个 Agent 输出
 │   ├── Summary.jsx         # 综合结论
-│   ├── InputPanel.jsx      # 输入与模式切换
-│   ├── Layout.jsx          # 页面布局与侧边栏
+│   ├── InputPanel.jsx      # 输入框与模式切换
+│   ├── Layout.jsx          # 侧边栏与页面框架
 │   └── RoundIndicator.jsx  # 讨论轮次指示
 ├── hooks/
 │   ├── useChat.js          # 对话模式状态与 API 调用
-│   ├── useDiscussion.js    # 讨论模式：并行 Agent + 总结
-│   └── useModeFlash.js     # 模式切换动效
+│   ├── useDiscussion.js    # 讨论模式：多 Agent 并发 + 总结
+│   └── useModeFlash.js     # 模式切换动画
 └── lib/
     └── api.js              # DeepSeek 流式 API 客户端
 ```
 
-## 数据流
+## 工作流程
 
-```
-用户输入 → useChat / useDiscussion
-              ↓
-         streamFromAgent（SSE 解析）
-              ↓
-         StreamText（react-markdown 渲染）
-```
+**对话模式：** 用户提问 → `useChat` 调用 `streamFromAgent` → `StreamText` 流式展示回复。
 
-项目规格见本地 `multi-agent-project.md`（已 gitignore）。
+**讨论模式：** 用户提问 → `useDiscussion` 并行启动三个 Agent → 按深度重复多轮 → 汇总各视角答案 → 主持人 Agent 生成综合结论。
+
+流式数据在 `api.js` 中解析 SSE（`data: {...}`），通过 `onChunk` 回调逐段更新 React 状态。
+
+## 部署
+
+构建产物在 `dist/` 目录，可部署至 Vercel、Netlify 等静态托管平台。生产环境需在平台配置 `VITE_DEEPSEEK_API_KEY` 环境变量。
