@@ -1,4 +1,4 @@
-import StreamText from './StreamText.jsx'
+import StreamText from './StreamText'
 
 const ROLE_STYLES = {
   critic: {

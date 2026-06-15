@@ -1,12 +1,12 @@
 import { useState, useMemo } from "react";
-import Layout from "./components/Layout.jsx";
-import InputPanel from "./components/InputPanel.jsx";
-import AgentGrid from "./components/AgentGrid.jsx";
-import RoundIndicator from "./components/RoundIndicator.jsx";
-import Summary from "./components/Summary.jsx";
-import ChatView from "./components/ChatView.jsx";
-import useChat from "./hooks/useChat.js";
-import useDiscussion from "./hooks/useDiscussion.js";
+import Layout from "./components/Layout";
+import InputPanel from "./components/InputPanel";
+import AgentGrid from "./components/AgentGrid";
+import RoundIndicator from "./components/RoundIndicator";
+import Summary from "./components/Summary";
+import ChatView from "./components/ChatView";
+import useChat from "./hooks/useChat";
+import useDiscussion from "./hooks/useDiscussion";
 
 const HOME_COPY = {
   chat: {
@@ -147,11 +147,16 @@ export default function App() {
             status={discussion.status}
           />
 
-          <AgentGrid agents={discussion.agents} streaming={discussion.streaming} />
+          <AgentGrid
+            agents={discussion.agents}
+            streaming={discussion.streaming}
+          />
 
           <Summary
             text={discussion.summary}
-            visible={discussion.status === "done" || discussion.summary.length > 0}
+            visible={
+              discussion.status === "done" || discussion.summary.length > 0
+            }
             isStreaming={isRunning && !discussion.summary}
           />
 

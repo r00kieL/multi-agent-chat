@@ -1,6 +1,6 @@
 import { useRef, useLayoutEffect, useState, useCallback } from "react";
-import { IconPlus, IconSend } from "./icons.jsx";
-import { useModeFlash } from "../hooks/useModeFlash.js";
+import { IconPlus, IconSend } from "./icons";
+import { useModeFlash } from "../hooks/useModeFlash";
 
 const MODE_OPTIONS = [
   { value: "chat", label: "Chat" },

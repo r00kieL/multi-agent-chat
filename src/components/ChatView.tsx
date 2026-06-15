@@ -1,4 +1,4 @@
-import StreamText from "./StreamText.jsx";
+import StreamText from "./StreamText";
 
 export default function ChatView({
   question,

@@ -1,4 +1,4 @@
-import StreamText from './StreamText.jsx'
+import StreamText from './StreamText'
 
 export default function Summary({ text = '', isStreaming = false, visible = false }) {
   if (!visible && !text) return null

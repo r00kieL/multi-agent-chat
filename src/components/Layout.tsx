@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IconPanel, IconSearch, IconMessage, IconSpark } from './icons.jsx'
+import { IconPanel, IconSearch, IconMessage, IconSpark } from './icons'
 
 const NAV_ITEMS = [
   { id: 'chats', label: '讨论', icon: IconMessage },

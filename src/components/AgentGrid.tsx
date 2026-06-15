@@ -1,4 +1,4 @@
-import AgentCard from './AgentCard.jsx'
+import AgentCard from './AgentCard'
 
 const AGENT_ROLES = ['critic', 'optimist', 'pragmatist']
 
