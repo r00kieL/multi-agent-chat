@@ -1,29 +1,29 @@
-import { useState } from 'react'
-import { IconPanel, IconSearch, IconMessage, IconSpark } from './icons'
+import { useState } from "react";
+import { IconPanel, IconSearch, IconMessage, IconSpark } from "./icons";
 
 const NAV_ITEMS = [
-  { id: 'chats', label: '讨论', icon: IconMessage },
-  { id: 'starred', label: '收藏', icon: IconSpark },
-]
+  { id: "chats", label: "讨论", icon: IconMessage },
+  { id: "starred", label: "收藏", icon: IconSpark },
+];
 
 const PLACEHOLDER_CHATS = [
-  '远程工作是否值得全面推行',
-  '学习 AI 应该先学理论还是实践',
-  '创业公司如何平衡速度与质量',
-]
+  "远程工作是否值得全面推行",
+  "学习 AI 应该先学理论还是实践",
+  "创业公司如何平衡速度与质量",
+];
 
 const QUICK_PROMPTS = [
-  { label: '分析', hint: '帮我分析一个决策' },
-  { label: '对比', hint: '对比两种方案的利弊' },
-  { label: '规划', hint: '制定一个 30 天学习计划' },
-  { label: '复盘', hint: '复盘这次项目的问题' },
-]
+  { label: "分析", hint: "帮我分析一个决策" },
+  { label: "对比", hint: "对比两种方案的利弊" },
+  { label: "规划", hint: "制定一个 30 天学习计划" },
+  { label: "复盘", hint: "复盘这次项目的问题" },
+];
 
 function Sidebar({ collapsed, onToggle, onNewChat }) {
   return (
     <aside
       className={`${
-        collapsed ? 'w-0 -ml-px overflow-hidden' : 'w-[260px]'
+        collapsed ? "w-0 -ml-px overflow-hidden" : "w-[260px]"
       } shrink-0 flex flex-col bg-surface border-r border-border-subtle transition-[width] duration-200`}
     >
       <div className="flex items-center justify-between px-4 h-14 shrink-0">
@@ -102,17 +102,17 @@ function Sidebar({ collapsed, onToggle, onNewChat }) {
         </div>
       </div>
     </aside>
-  )
+  );
 }
 
 export default function Layout({
   children,
   onNewChat,
-  quickPrompts,
+  quickPrompts = undefined,
   onQuickPrompt,
   showQuickPrompts = true,
 }) {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <div className="flex h-svh overflow-hidden">
@@ -153,5 +153,5 @@ export default function Layout({
         )}
       </div>
     </div>
-  )
+  );
 }
