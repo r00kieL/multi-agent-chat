@@ -61,11 +61,13 @@ export default function App() {
   };
 
   const handleNewChat = () => {
-    discussion.reset();
     chat.reset();
+    discussion.reset();
+
     setSessionType(null);
     setQuestion("");
     setInputMode("chat");
+    setDepth("medium");
   };
 
   const handleQuickPrompt = (hint) => {

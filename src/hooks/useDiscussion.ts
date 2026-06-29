@@ -77,6 +77,8 @@ export default function useDiscussion() {
 
     let roundAnswers = ["", "", ""];
     for (let round = 1; round <= rounds; round++) {
+      setCurrentRound(round);
+
       await Promise.all([
         streamFromAgent(
           AGENT_PROMPTS[0],
@@ -114,8 +116,6 @@ export default function useDiscussion() {
           }
         )
       ]);
-
-      setCurrentRound(round);
     }
 
     await summaryDiscussion(question, roundAnswers);
